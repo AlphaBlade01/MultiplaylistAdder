@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MultiplaylistAdder.Views.MainPage"
+             xmlns:viewmodels="clr-namespace:MultiplaylistAdder.ViewModels"
+             xmlns:models="clr-namespace:MultiplaylistAdder.Models"
+             x:DataType="viewmodels:MainViewModel">
+
+    <Grid RowDefinitions="25, *, 50, 25" ColumnDefinitions="*, 0.75">
+        <Label Grid.Row="0" Grid.ColumnSpan="2">Select playlists:</Label>
+        
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="2">
+            <CollectionView ItemsSource="{Binding Playlists}" SelectionMode="Multiple">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type models:Playlist}">
+                        <Grid RowDefinitions="0.8, *">
+                            <Label Text="{Binding Name}"/>
+                            <CheckBox IsChecked="{Binding Selected}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+
+        <Button Text="Add Song" Command="{Binding AddSongCommand}" Grid.Column="0"/>
+        <Label Text="{Binding CurrentlyPlaying}"/>
+        <Label Text="{Binding Status}" Grid.Row="3" Grid.ColumnSpan="2"/>
+    </Grid>
+
+</ContentPage>
