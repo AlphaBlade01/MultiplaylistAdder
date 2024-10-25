@@ -27,7 +27,7 @@ public static class MauiProgram
             });
         builder.Configuration.AddConfiguration(config);
         builder.Services
-            .AddSingleton<Spotify>()
+            .AddSingleton(Spotify.BuildClient(builder.Configuration))
             .AddSingleton<MainPage>()
             .AddSingleton<MainViewModel>();
 
