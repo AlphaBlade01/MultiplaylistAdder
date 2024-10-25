@@ -6,24 +6,38 @@
              xmlns:models="clr-namespace:MultiplaylistAdder.Models"
              x:DataType="viewmodels:MainViewModel">
 
-    <Grid RowDefinitions="25, *, 50, 25" ColumnDefinitions="*, 0.75">
-        <Label Grid.Row="0" Grid.ColumnSpan="2">Select playlists:</Label>
+    <Grid RowDefinitions="50, *, auto, 25" ColumnDefinitions="2*, *" Padding="10, 10">
+        <Label Grid.Row="0" Grid.ColumnSpan="2">Playlists:</Label>
         
-        <ScrollView Grid.Row="1" Grid.ColumnSpan="2">
-            <CollectionView ItemsSource="{Binding Playlists}" SelectionMode="Multiple">
+        <ScrollView Grid.Row="1" Grid.ColumnSpan="2" Margin="20, 0, 10, 10">
+            <CollectionView ItemsSource="{Binding Playlists}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type models:Playlist}">
-                        <Grid RowDefinitions="0.8, *">
-                            <Label Text="{Binding Name}"/>
-                            <CheckBox IsChecked="{Binding Selected}"/>
+                        <Grid ColumnDefinitions="*, 50">
+                            <Label Text="{Binding Name}" Grid.Column="0" VerticalTextAlignment="Center"/>
+                            <CheckBox IsChecked="{Binding Selected}" Grid.Column="1"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
 
-        <Button Text="Add Song" Command="{Binding AddSongCommand}" Grid.Column="0"/>
-        <Label Text="{Binding CurrentlyPlaying}"/>
+        <VerticalStackLayout Grid.Row="2" Grid.Column="0" VerticalOptions="Center" Margin="5">
+            <HorizontalStackLayout>
+                <Label VerticalTextAlignment="Center">Currently Playing:</Label>
+                <Label Text="{Binding CurrentlyPlayingName}" Margin="5, 0" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Label VerticalTextAlignment="Center">Artist:</Label>
+                <Label Text="{Binding CurrentlyPlayingArtist}" Margin="5, 0" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Row="2" Grid.Column="1">
+            <Button Text="Update Playing" Command="{Binding GetCurrentlyPlayingCommand}" Margin="0, 5"></Button>
+            <Button Text="Add Song" Command="{Binding AddSongCommand}" Margin="0, 5"/>
+        </VerticalStackLayout>
+        
         <Label Text="{Binding Status}" Grid.Row="3" Grid.ColumnSpan="2"/>
     </Grid>
 
