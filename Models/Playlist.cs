@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MultiplaylistAdder.Models;
 
-public struct Playlist
+public class Playlist
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
     public string Name { get; set; }
     public bool Selected { get; set; }
 }
